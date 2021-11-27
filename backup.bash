@@ -2,13 +2,13 @@
 
 cd /root
 now="$(date +%Y-%m-%d)"
-prev="$(ls | grep -E "^Backup-" | sort -n | tail -1 | cut -d "-" -f 2,3,4)"
-prevY="$(ls | grep -E "^Backup-" | sort -n | tail -1 | cut -d "-" -f 2)"
-prevM="$(ls | grep -E "^Backup-" | sort -n | tail -1 | cut -d "-" -f 3)"
-prevd="$(ls | grep -E "^Backup-" | sort -n | tail -1 | cut -d "-" -f 4)"
-nowY="$(date +%Y)"
-nowM="$(date +%-m)"
-nowd="$(date +%-d)"
+prev=$(ls | grep -E "^Backup-" | sort -n | tail -1 | cut -d "-" -f 2,3,4)
+prevY=$(ls | grep -E "^Backup-" | sort -n | tail -1 | cut -d "-" -f 2)
+prevM=$(ls | grep -E "^Backup-" | sort -n | tail -1 | cut -d "-" -f 3)
+prevd=$(ls | grep -E "^Backup-" | sort -n | tail -1 | cut -d "-" -f 4)
+nowY=$(date +%Y)
+nowM=$(date +%-m)
+nowd=$(date +%-d)
 flag=0
 diff=0
 if [[ $nowY -gt $prevY ]]
@@ -38,22 +38,22 @@ then
 else
 	cd /root/source
 	files="$(ls)"
-	cd /root/Backup-$prev
+	cd /root/Backup-"$prev"
 	
 	for i in $files 
 	do
 		if [ -f $i ]
 		then
-			currentSize=$(ls -l /root/source/$i | awk '{print $5}')
+			curSize=$(ls -l /root/source/$i | awk '{print $5}')
 			lastSize=$(ls -l $i | awk '{print $5}')
-			if [[ $currentSize -ne $backSize ]]
+			if [[ $curSize -ne $lastSize ]]
 			then
 				mv $i $i-$now
-				cp -R /root/source/$i /root/Backup-$prev
+				cp -R /root/source/$i /root/Backup-"$prev"
 				echo "$i was renamed to $i-$now" >> /root/backup-report
 			fi
 		else
-			cp -R /root/source/$i /root/Backup-$prev
+			cp -R /root/source/$i /root/Backup-"$prev"
 		fi
 	done	
 fi
