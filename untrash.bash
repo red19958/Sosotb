@@ -53,7 +53,7 @@ do
 					cd /root
 					if [ -e $1 ]
 					then
-						echo "file with this name is already exist, rename it?(Y/N)"
+						echo "file with this name is already exists, rename it?(Y/N)"
 						read secAns
 						if [ $secAns = "Y" ]
 						then
