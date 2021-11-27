@@ -34,7 +34,7 @@ do
 						read secAns
 						if [ $secAns = "Y" ]
 						then
-              echo "file named $1$filename"
+              						echo "file named $1$filename"
 							ln $filename "$dir$1$filename"
 							rm $filename
 						fi
