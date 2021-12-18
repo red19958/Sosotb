@@ -1,0 +1,59 @@
+1.1
+md LAB6
+ver > ver.txt
+systeminfo | find "Memory" > systeminfo_find.txt
+wmic logicaldisk get description,name > wmic.txt
+
+1.2
+md TEST
+copy LAB6 LAB6\TEST 
+cd LAB6\TEST
+
+1.3
+type *.txt >> type.txt
+
+1.4
+for %i in (*.*) do if %i NEQ type del %i
+
+2.1
+echo %computername%
+
+2.2
+echo for %%f in (c:\Windows\*) do (
+ if %%~zf gtr 2097152 xcopy /z %%f \\%computername%\temp\%%~nf%%~xf 
+) > copy.cmd
+
+2.3
+schtasks /create /sc minute /tn copy /tr copy.cmd
+
+2.4
+schtasks /query | find "copy"
+schtasks /delete /tn copy
+
+2.5
+echo for %%f in (c:\Windows\*) do ( fc c:\Windows\%%f \\%computername%\temp\%%f > fc.txt ) > check.cmd
+check.cmd
+
+2.6
+copy.cmd
+
+3.1
+net start > net_start.txt
+
+3.2.1
+net stop dnscache
+
+3.2.2 
+timeout /t 20 /nobreak & net start > timeout.txt
+
+3.2.3
+fc netstart.txt newnetstart.txt /n > fc.txt
+
+3.2.4
+net start dnscache
+
+4.1
+driverquery /fo table > driverquery.txt
+
+4.2
+sort /R driverquery.txt /o sort.txt
