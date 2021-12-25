@@ -47,7 +47,7 @@ net stop dnscache
 timeout /t 20 /nobreak & net start > timeout.txt
 
 3.2.3
-fc netstart.txt newnetstart.txt /n > fc.txt
+fc net_start.txt timeout.txt /n > fc.txt
 
 3.2.4
 net start dnscache
